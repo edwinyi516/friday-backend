@@ -3,8 +3,16 @@ const express = require('express')
 //import cors
 const cors =require('cors')
 /* == Internal Modules == */
-const routes = require('./routes')
+// const routes = require('./routes')
 
+// import {tasksRouter,projectsRouter,usersRouter} from './routes'
+//Instead of using mongoose's promise-like system, we'll be using Javascript's promise system:
+// mongoose.Promise = global.Promise;
+
+
+const tasksRouter = require("./routers/tasksRouter");
+const usersRouter = require("./routers/usersRouter");
+const projectsRouter = require("./routers/projectsRouter");
 /* == Express Instance == */
 const app = express()
 
@@ -23,7 +31,7 @@ app.use(express.urlencoded({extended: true}))
 app.use("/users", usersRouter);
 //---------------------------------------------------------------------------
 //INSERT PROJECT ROUTES HERE:
-app.use("/projects", projecsRouter);
+app.use("/projects", projectsRouter);
 //---------------------------------------------------------------------------
 //INSERT TASK ROUTES HERE:
 app.use("/tasks", tasksRouter);
