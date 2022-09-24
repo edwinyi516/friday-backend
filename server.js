@@ -19,7 +19,14 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-/* == Routes == */
+//INSERT USER ROUTES HERE:
+app.use("/users", usersRouter);
+//---------------------------------------------------------------------------
+//INSERT PROJECT ROUTES HERE:
+app.use("/projects", projecsRouter);
+//---------------------------------------------------------------------------
+//INSERT TASK ROUTES HERE:
+app.use("/tasks", tasksRouter);
 
 app.listen(PORT, () => {
   console.log('🎉🎊', 'Friday backend happening on port', PORT, '🎉🎊',)

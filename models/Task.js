@@ -4,9 +4,9 @@ const taskSchema = new mongoose.Schema({
   taskName: {type:String,required:true},
   description:{type:String,required:true},
   deadline:{type:Date,required:true},
-  creator:{type:String,required:true},
+  creatorID:{type:String,required:true},
   status:{type:String},
-  assignee:{type:String, required:true}
+  assigneeID:{type:String, required:true}
 })
 const Task =mongoose.model("Task",taskSchema)
 module.exports = Task;

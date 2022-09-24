@@ -3,7 +3,7 @@ const projectSchema = new mongoose.Schema({
   title: {type:String,required:true},
   description:{type:String,required:true},
   deadline:{type:Date,required:true},
-  creator:{type:String,required:true},
+  creatorID:{type:String,required:true},
   status:{type:String},
   members:{type:[]},
 })
