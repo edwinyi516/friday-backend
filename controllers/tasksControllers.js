@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Task = require("../OldModels/task");
+const {Task} = require('../models');
 
 mongoose.Promise = global.Promise;
 
@@ -20,7 +20,7 @@ const getTaskById = (req, res, next) => {
 };
 
 //GET ALL TASKS BY THEIR PROJECT ID
-const getAllTasksByOrijectId = (req, res, next) => {
+const getAllTasksByProjectId = (req, res, next) => {
   Task.find({ projectId: req.params.id }).then((tasks) => {
     res.json(tasks);
   });
@@ -52,7 +52,7 @@ const deleteTask = (req, res, id) => {
 module.exports = {
   getAllTasks,
   getTaskById,
-  getAllTasksByOrijectId,
+  getAllTasksByProjectId,
   createTask,
   editTask,
   deleteTask,

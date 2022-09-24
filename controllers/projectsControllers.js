@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Project = require("../OldModels/project");
+const {Project} = require('../models') 
 
 mongoose.Promise = global.Promise;
 
