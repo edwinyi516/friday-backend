@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {Project} = require('../models') 
+const {Project} = require('../models')
 
 mongoose.Promise = global.Promise;
 
@@ -10,21 +10,21 @@ const { JWT_KEY_SECRET } = require("../config");
 //INDEX ---> CONTROLLER
 const getAllProjects = (req, res, next) => {
   Project.find().then((projects) => {
-    res.json(projects[0].easyRead());
+    res.json(projects);
   });
 };
 
 //GET PROJECT BY ID ---> CONTROLLER
 const getProjectById = (req, res, next) => {
   Project.findById(req.params.id).then((project) => {
-    res.json(project.easyRead());
+    res.json(project);
   });
 };
 
 //CREATE ---> CONTROLLER
 const createProject = (req, res, next) => {
   Project.create(req.body).then((project) => {
-    res.json(project.easyRead());
+    res.json(project);
   });
 };
 
@@ -35,7 +35,7 @@ const editProject = (req, res, next) => {
     { $set: req.body },
     { new: true }
   ).then((project) => {
-    res.json(project.easyRead());
+    res.json(project);
   });
 };
 
