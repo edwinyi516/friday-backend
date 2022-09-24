@@ -1,6 +1,7 @@
 /* == External Modules == */
 const express = require('express')
-
+//import cors
+const cors =require('cors')
 /* == Internal Modules == */
 const routes = require('./routes')
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 3003;
 require('./config/db.connection')
 
 /* == Middleware == */
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
