@@ -1,6 +1,6 @@
 const mongoose = require ("mongoose");
 const taskSchema = new mongoose.Schema({
-  projectId:{type:String,required:true},
+  projectID:{type:String,required:true},
   taskName: {type:String,required:true},
   description:{type:String,required:true},
   deadline:{type:Date,required:true},
