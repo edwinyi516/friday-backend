@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose")
 
 const passport = require("passport")
+require("./config/passportConfig.js")(passport)
+
 const passportLocal = require("passport-local").Strategy
 const cookieParser = require("cookie-parser")
 const bcrypt = require("bcryptjs")
@@ -53,10 +55,9 @@ app.use(cookieParser(SESSION_SECRET))
 
 app.use(passport.initialize())
 app.use(passport.session())
-require("./config/passportConfig.js")(passport)
 
 //INSERT USER ROUTES HERE:
-// app.use("/users", usersRouter);
+app.use("/users", usersRouter);
 
 app.post("/login", (req, res, next) => {
   console.log("login route hit")
@@ -66,8 +67,7 @@ app.post("/login", (req, res, next) => {
   // })(req, res, next)
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err
-    console.log(user)
-    if (!user) res.send("No user exists")
+    if (!user) res.send ("No user exists")
     else {
       req.logIn(user, err => {
         if (err) throw err
