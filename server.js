@@ -6,6 +6,7 @@ const cors = require("cors");
 // const routes = require('./routes')
 
 const { tasksRouter, projectsRouter, usersRouter } = require("./routers");
+const morgan = require("morgan");
 
 //Instead of using mongoose's promise-like system, we'll be using Javascript's promise system:
 // mongoose.Promise = global.Promise;
@@ -23,6 +24,7 @@ require("./config/db.connection");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 //INSERT USER ROUTES HERE:
 app.use("/users", usersRouter);
