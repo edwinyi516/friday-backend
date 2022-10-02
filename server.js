@@ -99,12 +99,12 @@ app.post("/register", (req, res) => {
 })
 
 app.get("/user", (req, res) => {
-  console.log(req.user)
+  res.send(req.user)
 })
 
-app.post("/user", (req, res) => {
-  console.log(req.body)
-})
+// app.post("/user", (req, res) => {
+//   console.log(req.body)
+// })
 
 //---------------------------------------------------------------------------
 //INSERT PROJECT ROUTES HERE:
