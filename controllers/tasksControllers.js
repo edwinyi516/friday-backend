@@ -13,16 +13,18 @@ const getAllTasks = (req, res, next) => {
 
 //GET USER'S TODAY'S TASKS
 const getUsersTodaysTasks = (req, res, next) => {
-  //EDIT SECOND QUERY CONDITION TO TODAY
-  Task.find({ $and: [ { assigneeID: req.params.id }, { taskName: "defeat" } ] }).then((tasks) => {
+  let today = new Date()
+  today.setHours(0,0,0,0)
+  Task.find({ $and: [ { assigneeID: req.params.id }, { deadline: today } ] }).then((tasks) => {
     res.json(tasks);
   });
 };
 
 //GET USER'S UPCOMING TASKS
 const getUsersUpcomingTasks = (req, res, next) => {
-    //EDIT SECOND QUERY CONDITION TO AFTER TODAY
-  Task.find({ $and: [ { assigneeID: req.params.id }, { taskName: "defeat" } ] }).then((tasks) => {
+  let today = new Date()
+  today.setHours(0,0,0,0)
+  Task.find({ $and: [ { assigneeID: req.params.id }, { deadline: { $gt: today } } ] }).then((tasks) => {
     res.json(tasks);
   });
 };
