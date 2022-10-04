@@ -1,5 +1,6 @@
 /* == External Modules == */
 const express = require("express");
+const methodOverride = require("method-override")
 const mongoose = require("mongoose")
 
 const passport = require("passport")
@@ -43,6 +44,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
 app.use(morgan("dev"));
 
 app.use(bodyParser.json())
@@ -62,20 +64,20 @@ app.use(passport.session())
 app.use("/users", usersRouter);
 
 app.post("/login", (req, res, next) => {
-  console.log("login route hit")
   // passport.authenticate("local", {
   //   successRedirect: "/",
   //   failureRedirect: "/login"
   // })(req, res, next)
   passport.authenticate("local", (err, user, info) => {
+    console.log("route hit")
     if (err) throw err
     if (!user) res.send ("No user exists")
     else {
       req.logIn(user, err => {
         if (err) throw err
         res.send("Successfully logged in")
-        console.log(req.user)
-      })
+      }      
+      )
     }
   }) (req, res, next)
 })

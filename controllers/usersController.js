@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const {User} =require('../models');
 
-mongoose.Promise = global.Promise;
-
 const { JWT_KEY_SECRET } = require("../config");
 
 //--------------------- USER CONTROLLERS

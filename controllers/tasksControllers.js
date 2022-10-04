@@ -1,13 +1,28 @@
 const mongoose = require("mongoose");
 const {Task} = require('../models');
 
-mongoose.Promise = global.Promise;
-
 const { JWT_KEY_SECRET } = require("../config");
+const { startSession } = require("../models/User");
 
 //INDEX ---> CONTROLLER
 const getAllTasks = (req, res, next) => {
   Task.find().then((tasks) => {
+    res.json(tasks);
+  });
+};
+
+//GET USER'S TODAY'S TASKS
+const getUsersTodaysTasks = (req, res, next) => {
+  //EDIT SECOND QUERY CONDITION TO TODAY
+  Task.find({ $and: [ { assigneeID: req.params.id }, { taskName: "defeat" } ] }).then((tasks) => {
+    res.json(tasks);
+  });
+};
+
+//GET USER'S UPCOMING TASKS
+const getUsersUpcomingTasks = (req, res, next) => {
+    //EDIT SECOND QUERY CONDITION TO AFTER TODAY
+  Task.find({ $and: [ { assigneeID: req.params.id }, { taskName: "defeat" } ] }).then((tasks) => {
     res.json(tasks);
   });
 };
@@ -51,6 +66,8 @@ const deleteTask = (req, res, id) => {
 
 module.exports = {
   getAllTasks,
+  getUsersTodaysTasks,
+  getUsersUpcomingTasks,
   getTaskById,
   getAllTasksByProjectId,
   createTask,
