@@ -39,6 +39,15 @@ require("./config/db.connection");
 //   origin: "*",
 //   credentials: true
 // }));
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Origin, X-Requested-With, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -64,13 +73,6 @@ app.use(cookieParser(SESSION_SECRET))
 
 app.use(passport.initialize())
 app.use(passport.session())
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Origin, X-Requested-With, Accept, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE, OPTIONS');
-  next();
-});
 
 //INSERT USER ROUTES HERE:
 app.use("/users", usersRouter);
