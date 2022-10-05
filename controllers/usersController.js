@@ -1,7 +1,4 @@
-const mongoose = require("mongoose");
-const {User} =require('../models');
-
-const { JWT_KEY_SECRET } = require("../config");
+const {User} = require('../models');
 
 //--------------------- USER CONTROLLERS
 
@@ -21,7 +18,6 @@ const getUserById = (req, res, next) => {
 
 //CREATE --> CONTROLLER
 const createUser = (req, res, next) => {
-  //INSERT Data Validation that loops through array of required keys to prevent incorrect data structure from being posted
   User.create(req.body).then((usr) => {
     res.json(usr);
   });
@@ -29,7 +25,6 @@ const createUser = (req, res, next) => {
 
 //EDIT USER BY ID ............ CONTROLLER
 const editUser = (req, res, next) => {
-  //INSERT authorization check to make sure the person trying to edit has permission
   User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }).then(
     (usr) => {
       res.json(usr);
@@ -38,7 +33,6 @@ const editUser = (req, res, next) => {
 };
 
 const deleteUser = (req, res, next) => {
-  //INSERT authorization check to make sure the person trying to edit has permission
   User.findByIdAndDelete(req.params.id).then(() => {
     res.json(`Deleted user with id of ${req.params.id}`);
   });

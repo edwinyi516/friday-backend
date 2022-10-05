@@ -3,8 +3,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const { User } = require("../models");
 
-const { DATABASE_URL, PORT, JWT_KEY_SECRET } = require("../config");
-
 const {
   getAllUsers,
   getUserById,
@@ -20,7 +18,6 @@ router.get("/", getAllUsers);
 router.get("/:id", getUserById);
 
 router.get("/many/users", (req, res) => {
-  // console.log(req.query);
   let membersArray = [];
   req.query.member.forEach((member) => {
     membersArray.push(mongoose.Types.ObjectId(member));
@@ -34,9 +31,6 @@ router.get("/many/users", (req, res) => {
     res.json(usrs);
   });
 });
-
-//GET ALL USERS BY THEIR PROJECT ID
-// router.get("/project/:id", getAllUsersByProjectId);
 
 //CREATE
 router.post("/", createUser);

@@ -1,8 +1,4 @@
-const mongoose = require("mongoose");
 const { Task } = require("../models");
-
-const { JWT_KEY_SECRET } = require("../config");
-const { startSession } = require("../models/User");
 
 //INDEX ---> CONTROLLER
 const getAllTasks = (req, res, next) => {
@@ -39,7 +35,6 @@ const getTaskById = (req, res, next) => {
 //GET ALL TASKS BY THEIR PROJECT ID
 const getAllTasksByProjectId = (req, res, next) => {
   Task.find({ projectID: req.params.id }).then((tasks) => {
-    console.log(tasks);
     res.json(tasks);
   });
 };

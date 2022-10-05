@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const { JWT_KEY_SECRET } = require("../config");
-
 const {
   getAllProjects,
   getProjectById,

@@ -1,7 +1,4 @@
-const mongoose = require("mongoose");
-const {Project} = require('../models')
-
-const { JWT_KEY_SECRET } = require("../config");
+const { Project } = require('../models')
 
 //=========== CONTROLLERS
 

@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 
-const { JWT_KEY_SECRET } = require("../config");
-
 const {
   getAllTasks,
   getUsersTodaysTasks,
@@ -13,7 +11,6 @@ const {
   editTask,
   deleteTask,
 } = require("../controllers/tasksControllers");
-const { route } = require("./projectsRouter");
 
 //INDEX
 router.get("/", getAllTasks);
