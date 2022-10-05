@@ -3,8 +3,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const { User } = require("../models");
 
-mongoose.Promise = global.Promise;
-
 const { DATABASE_URL, PORT, JWT_KEY_SECRET } = require("../config");
 
 const {
