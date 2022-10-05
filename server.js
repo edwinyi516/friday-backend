@@ -35,10 +35,10 @@ const PORT = process.env.PORT || 3003;
 require("./config/db.connection");
 
 /* == Middleware == */
-app.use(cors({
-  origin: "*",
-  credentials: true
-}));
+// app.use(cors({
+//   origin: "*",
+//   credentials: true
+// }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -64,6 +64,13 @@ app.use(cookieParser(SESSION_SECRET))
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Origin, X-Requested-With, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE, OPTIONS');
+  next();
+});
 
 //INSERT USER ROUTES HERE:
 app.use("/users", usersRouter);
