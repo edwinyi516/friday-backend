@@ -33,7 +33,7 @@ require("./config/db.connection");
 
 /* == Middleware == */
 app.use(cors({
-  origin: "friday-project-mgmt-frontend.herokuapp.com",
+  origin: "http://localhost:3000",
   credentials: true
 }));
 app.use(express.json());
