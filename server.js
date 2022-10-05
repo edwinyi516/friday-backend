@@ -58,12 +58,12 @@ app.use(passport.session())
 app.use("/users", usersRouter);
 
 app.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", async (err, user, info) => {
     console.log("route hit")
     if (err) throw err
     if (!user) res.send ("No user exists")
     else {
-      req.logIn(user, err => {
+      await req.logIn(user, err => {
         if (err) throw err
         res.send("Successfully logged in")
       }      
