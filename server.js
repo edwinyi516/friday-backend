@@ -12,9 +12,12 @@ const bodyParser = require("body-parser")
 
 require("dotenv").config()
 const SESSION_SECRET = process.env.SESSION_SECRET
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 //import cors
 const cors = require("cors");
+
+app.set('trust proxy', 1)
 
 /* == Internal Modules == */
 const { tasksRouter, projectsRouter, usersRouter } = require("./routers");
@@ -46,7 +49,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
   secret: SESSION_SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoDBStore({
+    uri: process.env.MONGODB_URL,
+    collection: "mySessions"
+  }),
+  cookie: {
+    sameSite: "none",
+    secure: true
+  }
 }))
 
 app.use(cookieParser(SESSION_SECRET))
