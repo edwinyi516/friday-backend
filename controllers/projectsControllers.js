@@ -1,9 +1,4 @@
-const mongoose = require("mongoose");
-const {Project} = require('../models')
-
-mongoose.Promise = global.Promise;
-
-const { JWT_KEY_SECRET } = require("../config");
+const { Project } = require('../models')
 
 //=========== CONTROLLERS
 

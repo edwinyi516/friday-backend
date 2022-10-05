@@ -1,13 +1,10 @@
 const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-
-mongoose.Promise = global.Promise;
-
-const { JWT_KEY_SECRET } = require("../config");
+const router = express.Router({ mergeParams: true });
 
 const {
   getAllTasks,
+  getUsersTodaysTasks,
+  getUsersUpcomingTasks,
   getTaskById,
   getAllTasksByProjectId,
   createTask,
@@ -17,6 +14,12 @@ const {
 
 //INDEX
 router.get("/", getAllTasks);
+
+//GET USER'S TODAY'S TASKS
+router.get("/user/:id/today", getUsersTodaysTasks)
+
+//GET USER'S UPCOMING TASKS
+router.get("/user/:id/upcoming", getUsersUpcomingTasks)
 
 //GET TASK BY ID
 router.get("/:id", getTaskById);
