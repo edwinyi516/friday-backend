@@ -2,6 +2,9 @@
 const express = require("express");
 const methodOverride = require("method-override")
 
+/* == Express Instance == */
+const app = express();
+
 const passport = require("passport")
 require("./config/passportConfig.js")(passport)
 
@@ -24,9 +27,6 @@ const { tasksRouter, projectsRouter, usersRouter } = require("./routers");
 const morgan = require("morgan");
 
 const User = require("./models/User.js")
-
-/* == Express Instance == */
-const app = express();
 
 /* == Port == */
 const PORT = process.env.PORT || 3003;
