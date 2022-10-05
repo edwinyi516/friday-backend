@@ -35,18 +35,27 @@ const PORT = process.env.PORT || 3003;
 require("./config/db.connection");
 
 /* == Middleware == */
-// app.use(cors({
-//   origin: "*",
-//   credentials: true
-// }));
+const whitelist = ['http://localhost:3000', `${process.env.FRONTEND_URL}`];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (whitelist.indexOf(origin) !== -1 || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	credentials: true,
+};
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Origin, X-Requested-With, Accept, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Credentials', 'true')
-  next();
-});
+app.use(cors(corsOptions));
+
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Origin, X-Requested-With, Accept, Authorization');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE, OPTIONS');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true')
+//   next();
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
