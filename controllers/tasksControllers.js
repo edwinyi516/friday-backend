@@ -9,18 +9,22 @@ const getAllTasks = (req, res, next) => {
 
 //GET USER'S TODAY'S TASKS
 const getUsersTodaysTasks = (req, res, next) => {
-  let today = new Date()
-  today.setHours(0,0,0,0)
-  Task.find({ $and: [ { assigneeID: req.params.id }, { deadline: today } ] }).then((tasks) => {
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  Task.find({
+    $and: [{ assigneeID: req.params.id }, { deadline: today }],
+  }).then((tasks) => {
     res.json(tasks);
   });
 };
 
 //GET USER'S UPCOMING TASKS
 const getUsersUpcomingTasks = (req, res, next) => {
-  let today = new Date()
-  today.setHours(0,0,0,0)
-  Task.find({ $and: [ { assigneeID: req.params.id }, { deadline: { $gt: today } } ] }).then((tasks) => {
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  Task.find({
+    $and: [{ assigneeID: req.params.id }, { deadline: { $gt: today } }],
+  }).then((tasks) => {
     res.json(tasks);
   });
 };
@@ -58,7 +62,7 @@ const editTask = (req, res, next) => {
 //DELETE ---> CONTROLLER
 const deleteTask = (req, res, id) => {
   Task.findByIdAndDelete(req.params.id).then(() => {
-    res.json(`Deleted project with id of ${req.params.id}`);
+    res.json(`Deleted task with id of ${req.params.id}`);
   });
 };
 
