@@ -35,14 +35,8 @@ const PORT = process.env.PORT || 3003;
 require("./config/db.connection");
 
 /* == Middleware == */
-let baseURL = "";
-if (process.env.REACT_APP_ENVIRONMENT === "production") {
-  baseURL = "https://friday-project-mgmt-backend.herokuapp.com";
-} else {
-  baseURL = "http://localhost:3003";
-}
 app.use(cors({
-  origin: baseURL,
+  origin: "https://friday-project-mgmt-backend.herokuapp.com",
   credentials: true
 }));
 app.use(express.json());
