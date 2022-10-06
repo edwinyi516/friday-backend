@@ -2,6 +2,9 @@
 const express = require("express");
 const methodOverride = require("method-override")
 
+/* == Express Instance == */
+const app = express();
+
 const passport = require("passport")
 require("./config/passportConfig.js")(passport)
 
@@ -12,18 +15,18 @@ const bodyParser = require("body-parser")
 
 require("dotenv").config()
 const SESSION_SECRET = process.env.SESSION_SECRET
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 //import cors
 const cors = require("cors");
+
+app.set('trust proxy', 1)
 
 /* == Internal Modules == */
 const { tasksRouter, projectsRouter, usersRouter } = require("./routers");
 const morgan = require("morgan");
 
 const User = require("./models/User.js")
-
-/* == Express Instance == */
-const app = express();
 
 /* == Port == */
 const PORT = process.env.PORT || 3003;
@@ -46,7 +49,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
   secret: SESSION_SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoDBStore({
+    uri: process.env.MONGODB_URL,
+    collection: "mySessions"
+  }),
+  cookie: {
+    sameSite: "none",
+    secure: true
+  }
 }))
 
 app.use(cookieParser(SESSION_SECRET))
@@ -65,11 +76,17 @@ app.post("/login", (req, res, next) => {
     else {
       await req.logIn(user, err => {
         if (err) throw err
-        res.send("Successfully logged in")
-      }      
+        res.send(req.user)
+      }
       )
     }
   }) (req, res, next)
+})
+app.post("/logout", (req, res, next) => {
+  req.logout((err) => {
+      if(err) { return next(err) }
+  })
+  res.end('You are logged out!')
 })
 
 app.post("/register", (req, res) => {
