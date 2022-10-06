@@ -65,11 +65,17 @@ app.post("/login", (req, res, next) => {
     else {
       await req.logIn(user, err => {
         if (err) throw err
-        res.send("Successfully logged in")
-      }      
+        res.send(req.user)
+      }
       )
     }
   }) (req, res, next)
+})
+app.post("/logout", (req, res, next) => {
+  req.logout((err) => {
+      if(err) { return next(err) }
+  })
+  res.end('You are logged out!')
 })
 
 app.post("/register", (req, res) => {
