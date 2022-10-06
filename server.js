@@ -36,7 +36,7 @@ require("./config/db.connection");
 
 /* == Middleware == */
 app.use(cors({
-  origin: "https://friday-project-mgmt-backend.herokuapp.com",
+  origin: "https://friday-project-mgmt-frontend.herokuapp.com",
   credentials: true
 }));
 app.use(express.json());
