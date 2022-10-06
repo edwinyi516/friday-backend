@@ -50,6 +50,7 @@ app.use(session({
   secret: SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
+  // //****COMMENT OUT FOR LOCAL****//
   store: new MongoDBStore({
     uri: process.env.MONGODB_URL,
     collection: "mySessions"
@@ -58,6 +59,7 @@ app.use(session({
     sameSite: "none",
     secure: true
   }
+  // //*************//
 }))
 
 app.use(cookieParser(SESSION_SECRET))
