@@ -15,7 +15,7 @@ const bodyParser = require("body-parser");
 
 require("dotenv").config();
 const SESSION_SECRET = process.env.SESSION_SECRET;
-// const MongoDBStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 //import cors
 const cors = require("cors");
