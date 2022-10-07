@@ -15,7 +15,7 @@ const bodyParser = require("body-parser");
 
 require("dotenv").config();
 const SESSION_SECRET = process.env.SESSION_SECRET;
-// const MongoDBStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 //import cors
 const cors = require("cors");
@@ -54,14 +54,14 @@ app.use(
     resave: true,
     saveUninitialized: true,
     // //****COMMENT OUT FOR LOCAL****//
-    // store: new MongoDBStore({
-    //   uri: process.env.MONGODB_URL,
-    //   collection: "mySessions"
-    // }),
-    // cookie: {
-    //   sameSite: "none",
-    //   secure: true
-    // }
+    store: new MongoDBStore({
+      uri: process.env.MONGODB_URL,
+      collection: "mySessions"
+    }),
+    cookie: {
+      sameSite: "none",
+      secure: true
+    }
     // //*************//
   })
 );
