@@ -9,18 +9,29 @@ const getAllTasks = (req, res, next) => {
 
 //GET USER'S TODAY'S TASKS
 const getUsersTodaysTasks = (req, res, next) => {
-  let today = new Date()
-  today.setHours(0,0,0,0)
-  Task.find({ $and: [ { assigneeID: req.params.id }, { deadline: today } ] }).then((tasks) => {
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  Task.find({
+    $and: [{ assigneeID: req.params.id }, { deadline: today }],
+  }).then((tasks) => {
+    res.json(tasks);
+  });
+};
+
+//GET USER'S  TASKS
+const getUsersTasks = (req, res, next) => {
+  Task.find({ assigneeID: req.params.id }).then((tasks) => {
     res.json(tasks);
   });
 };
 
 //GET USER'S UPCOMING TASKS
 const getUsersUpcomingTasks = (req, res, next) => {
-  let today = new Date()
-  today.setHours(0,0,0,0)
-  Task.find({ $and: [ { assigneeID: req.params.id }, { deadline: { $gt: today } } ] }).then((tasks) => {
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  Task.find({
+    $and: [{ assigneeID: req.params.id }, { deadline: { $gt: today } }],
+  }).then((tasks) => {
     res.json(tasks);
   });
 };
@@ -71,4 +82,5 @@ module.exports = {
   createTask,
   editTask,
   deleteTask,
+  getUsersTasks,
 };
