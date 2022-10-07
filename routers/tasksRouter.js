@@ -10,16 +10,19 @@ const {
   createTask,
   editTask,
   deleteTask,
+  getUsersTasks,
 } = require("../controllers/tasksControllers");
 
 //INDEX
 router.get("/", getAllTasks);
 
 //GET USER'S TODAY'S TASKS
-router.get("/user/:id/today", getUsersTodaysTasks)
+router.get("/user/:id/today", getUsersTodaysTasks);
 
 //GET USER'S UPCOMING TASKS
-router.get("/user/:id/upcoming", getUsersUpcomingTasks)
+router.get("/user/:id/upcoming", getUsersUpcomingTasks);
+
+router.get("/user/:id", getUsersTasks);
 
 //GET TASK BY ID
 router.get("/:id", getTaskById);
