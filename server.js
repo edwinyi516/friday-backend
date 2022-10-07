@@ -52,14 +52,14 @@ app.use(
     resave: true,
     saveUninitialized: true,
     // //****COMMENT OUT FOR LOCAL****//
-    // store: new MongoDBStore({
-    //   uri: process.env.MONGODB_URL,
-    //   collection: "mySessions"
-    // }),
-    // cookie: {
-    //   sameSite: "none",
-    //   secure: true
-    // }
+    store: new MongoDBStore({
+      uri: process.env.MONGODB_URL,
+      collection: "mySessions"
+    }),
+    cookie: {
+      sameSite: "none",
+      secure: true
+    }
     // //*************//
   })
 );
