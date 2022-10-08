@@ -37,7 +37,7 @@ require("./config/db.connection");
 /* == Middleware == */
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://friday-project-mgmt-frontend.herokuapp.com",
     credentials: true,
   })
 );
@@ -54,14 +54,14 @@ app.use(
     resave: true,
     saveUninitialized: true,
     // //****COMMENT OUT FOR LOCAL****//
-    // store: new MongoDBStore({
-    //   uri: process.env.MONGODB_URL,
-    //   collection: "mySessions"
-    // }),
-    // cookie: {
-    //   sameSite: "none",
-    //   secure: true
-    // }
+    store: new MongoDBStore({
+      uri: process.env.MONGODB_URL,
+      collection: "mySessions"
+    }),
+    cookie: {
+      sameSite: "none",
+      secure: true
+    }
     // //*************//
   })
 );
