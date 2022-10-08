@@ -18,10 +18,18 @@ router.get("/", getAllUsers);
 router.get("/:id", getUserById);
 
 router.get("/many/users", (req, res) => {
+  if (typeof req.query.member === "string") {
+    req.query.member = [req.query.member];
+  }
+
   let membersArray = [];
+
+  console.log(req.query);
   req.query.member.forEach((member) => {
     membersArray.push(mongoose.Types.ObjectId(member));
   });
+
+  console.log(membersArray);
 
   User.find({
     _id: {
