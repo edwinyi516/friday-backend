@@ -35,10 +35,12 @@ const PORT = process.env.PORT || 3003;
 require("./config/db.connection");
 
 /* == Middleware == */
-app.use(cors({
-  origin: ["https://friday-project-mgmt-frontend.herokuapp.com", "http://localhost:3000"],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -52,14 +54,14 @@ app.use(
     resave: true,
     saveUninitialized: true,
     // //****COMMENT OUT FOR LOCAL****//
-    store: new MongoDBStore({
-      uri: process.env.MONGODB_URL,
-      collection: "mySessions"
-    }),
-    cookie: {
-      sameSite: "none",
-      secure: true
-    }
+    // store: new MongoDBStore({
+    //   uri: process.env.MONGODB_URL,
+    //   collection: "mySessions"
+    // }),
+    // cookie: {
+    //   sameSite: "none",
+    //   secure: true
+    // }
     // //*************//
   })
 );
