@@ -36,8 +36,7 @@ require("./config/db.connection");
 
 /* == Middleware == */
 app.use(cors({
-  origin: "*",
-  credentials: true
+  origin: "*"
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
